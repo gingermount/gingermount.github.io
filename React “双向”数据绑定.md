@@ -77,10 +77,15 @@
    });
  ```
    通过上面的例子可以看到，ReactLink其实本质上只是提供了onchange setState模式的简单包装和约定。要使用它，其约定的形式为：
+   
    1、需要mixins添加引用
+   
    2、原先的value绑定换成valueLink。参数从this.state.XX换成this.linkState('XX')
-   其中Reactlink对象也可以在组件间通过props传递
+   
+   其中Reactlink对象也可以在组件间通过props传递。
+   
    还应该注意的一点是，在输入项中，checkbox的情况有其不同，因为它的value属性的改变行为发生的时机有区别。checkbox若被选中，其value属性值是在表单提交的时候发送出去，而在选中和非选中的状态切换时，value属性不改变，也不能像上述那样拿到改变的状态值。所以在用LinkedStateMixin时，提供了特殊的checkedLink，来代替valueLink，代码如下如下：
+   
 ```js
     var checkTest = React.createClass({
     mixins:[React.addons.LinkedStateMixin
